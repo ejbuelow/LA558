@@ -1,1 +1,15 @@
-;i
+<!DOCTYPE htm>
+<html>
+<head>
+  <meta charset="UTF-8">
+</head>
+<stlye >
+    body {background-color:yellow}
+    p {color:blue}
+    h1
+</style>
+<body>
+A map of corn production<br>
+<img src="https://www.bls.gov/oes/2017/may/map_changer.htm" alt="Layers Annual Mean Wage by MSA" width= "738" height="570"
+</body>
+</html>.
