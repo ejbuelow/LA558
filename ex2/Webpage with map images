@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Webpage with Map Images</title>
+<style>
+body {
+	color: purple;
+}
+h1 {
+	font-family: Times, serif;
+	font-size: 70px;
+	color: red;
+}
+</style>
+</head>
+<body>
+<h1>My First Heading</h1>
+<p>This new Webpage includes a Map Image with a strong layout.<p/>
+<a href= "https://www.music.iastate.edu/files/page/images/map.jpg</a>
+<src="LA558/IMG_0053.JPG"
+
+</body>
+</html>
