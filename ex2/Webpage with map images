@@ -19,7 +19,8 @@ h1 {
 <a href= "https://www.music.iastate.edu/files/page/images/map.jpg</a>
 <src="LA558/IMG_0053.JPG"
 
-<img= "iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-27.597656250000004%2C40.78054143186033%2C16.391601562500004%2C60.174306261926034&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=5/51.495/-5.603">View Larger Map</a></small">
+<img src= "LA558/images/LA558/WMSServer.jpeg"
+      
 
 </body>
 </html>  
