@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Assignment 1: JavaScript Skills</h2>
+
+<p id="demo"></p>
+
+<script>
+var text = '{"creator":[' +
+'{"firstName":"No","lastName":"One" },' +
+'{"firstName":"Edward","lastName":"Buelow" }]}';
+
+obj = JSON.parse(text);
+document.getElementById("demo").innerHTML =
+obj.creator[1].firstName + " " + obj.creator[1].lastName;
+</script>
+
+<head>
+<script>
+function myFunction() {
+  document.getElementById("demoA").innerHTML = "November 18, 1996";
+}
+
+</script>
+</head>
+<body>
+
+<h2>When was I born?</h2>
+<p id="demoA">Birthdate</p>
+
+<button type="button" onclick="myFunction()">Click Here!</button>
+
+<h2>Family Members</h2>
+
+<p id="demoB"></p>
+
+<script>
+var family = ["Trish", " Dan", " Rob", " Charlie", " Annie"];
+document.getElementById("demoB").innerHTML = family;
+</script>
+
+<h2>Favorite Activities:<h2>
+
+<p id ="activities"></p>
+
+<script>
+var activities = ["camping", "fishing", "snowboarding"];
+var text = "";
+var i;
+for (i = 0; i < activities.length; i++) {
+  text += activities[i] + "<br>";
+}
+document.getElementById("activities").innerHTML = text;
+</script>
+
+
+
+</body>
+</html>
