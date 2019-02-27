@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Hometown.</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
     
     <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
 
@@ -48,20 +48,20 @@
         // loop through the array and add a marker for each //
         for (var i = 0; i < towns.length; i++) {
             marker = new L.marker([towns[i][0], towns[i][1]])
-                .blindPopup(towns[i][2])
+                .bindPopup(towns[i][2])
                 .addTo(map);
         }
         // links below the Map //
         //Pan to frasier
         function frasier() {
-            map.panTo(new L.latlng(41.8781, -87.6296));
+            map.panTo(new L.LatLng(41.8781, -87.6296));
         }
         // set Zoon
         $("#zoomOut").click(function() {
-            map.setZoom(12);
+            map.setZoom(8);
         });
         // Ames, Iowa
-        $"#minneapolis").click(function() {
+        $("#minneapolis").click(function() {
             map.setView(new L.LatLng(44.9537, -93.0900), 12)
         });
     </script>
@@ -70,9 +70,6 @@
 
 
 
-</body>
-
-</html>
 
 </body>
 
