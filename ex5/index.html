@@ -40,11 +40,11 @@
             .openPopup();
         // add multiple town markers //
         // a array list of towns //
-        var towns = [
+        var towns = ([
             [42.0308, -93.6319, "Ames, Iowa"]
             [44.9537, -93.0900, "Minneapolis, Minnesota"]
             [41.8781, -87.6296, "Chicago, Illinois"]
-        ];
+        ]);
         // loop through the array and add a marker for each //
         for (var i = 0; i < towns.length; i++) {
             marker = new L.marker([towns[i][0], towns[i][1]])
