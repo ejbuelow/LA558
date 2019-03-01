@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<meta name="robots" content="noindex">
+<html>
+<head>
+<meta name="description" content="LA 458/558 12a Leaflet circl vs circle markers - 2018">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Hometown Improved</title>
+	
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" /> <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+	
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+	
+<style id="jsbin-css">
+#map {
+     width: 1000px;
+     height: 800px;
+}
+</style>
+</head>
+<body>
+<div id='map'></div>
+
+//----color markers-----
+
+
+<script id="jsbin-javascript">
+var map = L.map('map').setView([42.1539, -88.1362], 12);
+    
+    
+
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+//google color icon marker
+L.marker([42.1539, -88.1362]).addTo(map)
+   .bindPopup("Chicago, IL");
+
+
+
+
+//----------Adding a circle (overlay) that will scale with map----------
+
+//circle must include a radius option expressed in meters. Additional options are the same as those for a path (http://leafletjs.com/reference-1.3.0.html#path) and can be included to chage the circle from the defualt blue.  Comment out to see impact. Note no var was declared for the circle, but I could have done so.
+ L.circle([42.00185, -93.66], {
+	radius: 1200,
+	fill: true, //could be false
+	color: 'green', //the outline color
+	fillColor: 'lightgreen',
+	fillOpacity: 0.8  //this represents 80%
+ }).bindPopup("This is a circle").addTo(map);
+
+//the use of the periods before .bindup and .addTo(map) is called chaining and allows you to tell the 
+
+
+
+
+
+//----------Adding a circle marker that will scale with map----------
+
+//circle markers must include a radius option expressed in pixels. Additional options are the same as those for a path (http://leafletjs.com/reference-1.3.0.html#path) and can be included to chage the circle from the defualt blue.  Comment out to see impact.
+var exampleMarker = new L.circleMarker([42.00185, -93.60], {
+    radius: 43,  //in pixels
+	fillColor: 'orange',
+	color: "#000",  //this is black color outline
+	weight: 2, //outline weight is thickness of outline
+	opacity: 1, //opacity of the outline
+	fillOpacity: 0.9    
+}).bindPopup("This is a circle marker").addTo(map);
+</script>
+</body>
+</html>
