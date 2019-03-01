@@ -35,9 +35,14 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-//google color icon marker
-L.marker([42.1539, -88.1362]).addTo(map)
-   .bindPopup("Chicago, IL");
+
+//------Add Google Marker to Map-------
+<script id="jsbin-javascript">
+var marker = L.marker('map').setView([42.1539, -88.1362], 12), {
+	draggable: true,
+	title: "Hello World!"
+	opacity: 0.4
+}).addTo(map);
 
 
 
