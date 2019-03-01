@@ -37,12 +37,8 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 
 
 //------Add Google Marker to Map-------
-<script id="jsbin-javascript">
-var marker = L.marker('map').setView([42.1539, -88.1362], 12), {
-	draggable: true,
-	title: "Hello World!"
-	opacity: 0.4
-}).addTo(map);
+L.marker([42.1539, -88.1362]).addTo(map)
+   .bindPopup("Barrington, IL");
 
 
 
