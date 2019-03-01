@@ -26,7 +26,7 @@
 	
 //----Set Map View-----
 	
-<script id="jsbin-javascript">
+
 var map = L.map('map').setView([42.1539, -88.1362], 12);
     
     
@@ -66,12 +66,12 @@ marker2.bindPopup("<br>Hello World!<br><br>I am a Popup.").openPopup();
 //----------Adding a circle marker that will scale with map----------
 
 //circle markers must include a radius option expressed in pixels. Additional options are the same as those for a path (http://leafletjs.com/reference-1.3.0.html#path) and can be included to chage the circle from the defualt blue.  Comment out to see impact.
-var exampleMarker = new L.circleMarker([42.00185, -93.60], {
+var circleMarker = new L.circleMarker([42.00185, -93.60], {
     radius: 43,  //in pixels
 	fillColor: 'blue',
-	color: "#111",  //this is black color outline
-	weight: 2, //outline weight is thickness of outline
-	opacity: 1, //opacity of the outline
+	color: "#111",  
+	weight: 2, 
+	opacity: 1, 
 	fillOpacity: 0.7    
 }).bindPopup("Circle Marker").addTo(map);
 	
