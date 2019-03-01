@@ -39,6 +39,10 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 //------Add Google Marker to Map-------
 L.marker([42.1539, -88.1362]).addTo(map)
    .bindPopup("Barrington, IL");
+	
+var = marker2 = L.marker([42.1539, -88.1352]).addTo(map);
+	
+marker2.bindPopup("<br>Hello World!<br><br>I am a Popup.").openPopup();
 
 
 
@@ -50,7 +54,7 @@ L.marker([42.1539, -88.1362]).addTo(map)
 	radius: 1200,
 	fill: true, //could be false
 	color: 'red', //the outline color
-	fillColor: 'blue',
+	fillColor: '#03f',
 	fillOpacity: 0.3  //this represents 80%
  }).bindPopup("Radius of Downtown").addTo(map);
 
@@ -70,6 +74,29 @@ var exampleMarker = new L.circleMarker([42.00185, -93.60], {
 	opacity: 1, //opacity of the outline
 	fillOpacity: 0.7    
 }).bindPopup("Circle Marker").addTo(map);
+	
+//-----PolyLine------
+var latlngs = [
+    [42.1539, -88.1362],
+    [42.1670,-85.1444],
+    [47.1800, -80.9873]
+];
+var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+// zoom the map to the polyline
+map.fitBounds(polyline.getBounds());
+	
+//----Add Rectangle Boundary----
+
+// define rectangle geographical bounds
+var bounds = [[41.1539, -90.1362], [44.1539, -85.1362]];
+// create an orange rectangle
+L.rectangle(bounds, {color: "#ff7623", weight: 2}).addTo(map);
+// zoom the map to the rectangle bounds
+map.fitBounds(bounds);
+	
+	
+
+	
 </script>
 </body>
 </html>
