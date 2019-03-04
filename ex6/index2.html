@@ -39,12 +39,14 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 
 
 //------Add Google Marker to Map-------
+
+
 L.marker([42.1539, -88.1362]).addTo(map)
    .bindPopup("Barrington, IL");
+
+//-----Another Attempt at creating a Google Marker-----
+
 	
-var = marker2 = L.marker([42.1539, -88.1352]).addTo(map);
-	
-marker2.bindPopup("<br>Hello World!<br><br>I am a Popup.").openPopup();
 
 
 //----------Adding a circle (overlay) that will scale with map----------
@@ -87,11 +89,8 @@ map.fitBounds(polyline.getBounds());
 	
 //----Add Rectangle Boundary----
 
-// define rectangle geographical bounds
 var bounds = [[41.1539, -90.1362], [44.1539, -85.1362]];
-// create an orange rectangle
-L.rectangle(bounds, {color: "#ff7623", weight: 2}).addTo(map);
-// zoom the map to the rectangle bounds
+L.rectangle(bounds, {color: "#ff7623", weight: 4}).addTo(map);
 map.fitBounds(bounds);
 	
 	
@@ -100,3 +99,15 @@ map.fitBounds(bounds);
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
