@@ -44,20 +44,18 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 L.marker([42.1539, -88.1362]).addTo(map)
    .bindPopup("Barrington, IL");
 
-//-----Another Attempt at creating a Google Marker-----
-
 	
 
 
 //----------Adding a circle (overlay) that will scale with map----------
 
 //circle must include a radius option expressed in meters. Additional options are the same as those for a path (http://leafletjs.com/reference-1.3.0.html#path) and can be included to chage the circle from the defualt blue.  Comment out to see impact. Note no var was declared for the circle, but I could have done so.
- L.circle([42.1539, -88.1362], {
-	radius: 1200,
-	fill: true, //could be false
-	color: 'red', //the outline color
-	fillColor: '#03f',
-	fillOpacity: 0.3  //this represents 80%
+ L.circle([43.1539, -88.1362], {
+	radius: 1500,
+	fill: true, 
+	color: 'red', 
+	fillColor: 'black',
+	fillOpacity: 0.3  
  }).bindPopup("Radius of Downtown").addTo(map);
 
 //the use of the periods before .bindup and .addTo(map) is called chaining and allows you to tell the 
