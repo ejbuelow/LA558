@@ -1,37 +1,53 @@
-<!DOCTYPE>
-<html>
+<!DOCTYPE html>
 
 <meta name="robots" content="noindex">
 <html>
-<head>
-<meta name="description" content="LA 458/558 12a Leaflet circl vs circle markers - 2018">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Assignment 2</title>
-	
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" /> <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>	
 
+  <head>
+    <title>Assignment 2</title>
 
-<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-	
-<style id="jsbin-css">
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
+
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+  <style id="jsbin-css">
 #map {
-     width: 1000px;
-     height: 800px;
+     width: 700px;
+     height: 400px;
 }
 </style>
-</head>
-<body>
-<div id='map'></div>
-	
-<script id="jsbin-javascript">
-var map = L.map('map').setView([42.1539, -88.1362], 12);
-	
-	
-	
-//----Set Map View-----
 
-	
+</head>
+
+  <body onkeypress="full(event);" dblclick="remove(event)">
+    <h1>My Time in Bristol Bay, AK</h1>
+    <p>Click the map to add a marker. Drag the marker to adjust its position.</p>
+    <p>Below are some Fishing Spots near Bristol Bay.</p>
+    <div id='map'></div>  
+    
+    <h2>Itinerary</h2>
+    <p id="itinerary"></p>
+    <button id="Button1">See all destination labels</button> <br>
+    <button id="Button2">Erase destinations to start over</button> <br>
+
+    <h2>Page features</h2>
+    <ol>
+      <li>Show the names of Fishing Spots on mouse over</li>
+      <li>By clicking on a marker, add the location as a destination via label and color</li>
+      <li>Return to full extent by pressing any key</li>
+      <li>Click a button to reset</li>
+      <li>Right click to add additional destinations</li>
+      <li></li>
+    </ol>    
+  <script id="jsbin-javascript">
+console.clear();
+
+var map = L.map('map').setView([59.25401, -157.65729], 8
+
+                              );
+//----FROM PREVIOUS ATTEMPTS----
+
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
@@ -94,9 +110,116 @@ L.rectangle(bounds, {color: "#ff7623", weight: 4}).bindPopup('Flight Area: Homer
 map.fitBounds(bounds);
 
 
-	
-	
-	
+
+
+
+
+
+//----FROM EXAMPLE-----
+
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var FishingSpots = [
+	[59.03979, -158.46239, "Dillingham"],
+	[59.24401,-157.65729, "Nushagak River"],
+	[59.680974, -157.338245, "Mulchatna River"],
+  [59.25401,-157.65729, "Kuktuli River"],
+  
+];
+
+var Icon1 = L.icon({
+    iconUrl: 'http://www.googlemapsmarkers.com/v1/6699ff',
+    iconSize:     [21, 34], // size of the icon
+    iconAnchor:   [10, 34], // point of the icon which will correspond to marker's location
+	popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
+});
+
+var Icon2 = L.icon({
+    iconUrl: 'http://www.googlemapsmarkers.com/v1/ffcc00',
+    iconSize:     [21, 34], // size of the icon
+    iconAnchor:   [10, 34], // point of the icon which will correspond to marker's location
+	popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
+});
+
+//loop through the array and add a marker for each
+var sMarkers = []
+for (var i = 0; i < fishingSpots.length; i++) {
+	sMarkers[i] = new L.marker([FishingSpots[i][0],FishingSpots[i][1]],{icon:Icon1})
+	.bindPopup(FishingSpots[i][2])
+	.addTo(map)
+  .on('click', onClick);
+}
+
+//*****************************************************
+//All code below this are functions that work with an event
+//*****************************************************
+
+
+//** 1 Show the names of Fishing Spots on mouse over
+for (var i = 0; i < fishingSpots.length; i++) {
+    sMarkers[i].bindPopup(fishingSpots[i][2]);
+        sMarkers[i].on('mouseover', function (e) {
+            this.openPopup();
+        })
+        sMarkers[i].on('mouseout', function (e) {
+            this.closePopup();
+        })
+}
+
+//** 2 On click, change the Fishing Spot location to a destination
+var destinations = [];
+
+function onClick(e) {
+  popup = e.target.getPopup();
+  content = popup.getContent();
+  this._popup.setContent('Destination: '+content)
+  .openPopup()
+  this.setIcon(Icon2)
+  
+  document.getElementById("itinerary").innerHTML = destinations;
+  destinations.push('<br>'+content);
+  document.getElementById("itinerary").innerHTML = destinations;
+}
+//Ideally, clicking again would reverse this instead of repeating it.. I can't figure that out.
+
+//** 3 return to full extent by pressing "F" 102
+function full(e){
+//  if (keyPressed.keyCode==70){
+	map.setView([55.9490, -3.19], 14.0);
+//  };
+};
+//I can't make this work with just the F key as I had hoped!
+
+//** 4 Start over
+$("#Button").click(function() {
+	for (var i = 0; i < fishingSpots.length; i++) {
+  sMarkers[i]._popup.setContent(fishingSpots[i][2])
+  sMarkers[i].setIcon(Icon1)
+  }
+  document.getElementById("itinerary").innerHTML = "";
+});
+
+//** 5 Right click to add additional destinations
+
+map.on('contextmenu',(e) => {
+  var marker=L.marker()
+  .setLatLng(e.latlng)
+  .setIcon(Icon2)
+  .addTo(map)
+  .openOn(map);
+});
+
+//** 6 Record zooming or movement
+map.on('zoomend', function(ev) {
+	document.getElementById("nav").innerHTML = "zoomed";
+});
+
+map.on('move', function(ev) {
+  document.getElementById("nav").innerHTML = "moved";
+});
 </script>
 </body>
+
 </html>
