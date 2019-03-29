@@ -28,8 +28,12 @@
     
     <h2>Itinerary</h2>
     <p id="itinerary"></p>
-    <button id="Button1">See all destination labels</button> <br>
-    <button id="Button2">Erase destinations to start over</button> <br>
+    <button id="#Button1">See all destination labels</button> <br>
+    <button id="#Button2">Erase destinations to start over</button> <br>
+
+	$("#Button1").click(function() {
+	console.log("Button1 pressed")
+	});
 
     <h2>Page features</h2>
     <ol>
@@ -42,12 +46,9 @@
     </ol>    
   <script id="jsbin-javascript">
 console.clear();
-
 var map = L.map('map').setView([59.25401, -157.65729], 8
-
                               );
 //----FROM PREVIOUS ATTEMPTS----
-
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
@@ -56,8 +57,6 @@ L.marker([59.64656, -151.54422]).addTo(map)
    .bindPopup("Homer, AK");
 	
 //----------Adding a circle (overlay) that will scale with map----------
-
-
  L.circle([59.25401,-157.65729], {
 	radius: 1000,
 	fill: true, 
@@ -65,8 +64,6 @@ L.marker([59.64656, -151.54422]).addTo(map)
 	fillColor: 'black',
 	fillOpacity: 0.8  
  }).bindPopup("Base Camp").addTo(map);
-
-
 //----Various Locations----
 var fishingSpots = [
 	[59.03979, -158.46239, "Dillingham"],
@@ -75,11 +72,7 @@ var fishingSpots = [
   [59.25401,-157.65729, "Kuktuli River"],
   
 ];
-
-
 //----------Adding a circle marker that will scale with map----------
-
-
 var circleMarker = new L.circleMarker([59.753109, -154.91272], {
     radius: 20,  //in pixels
 	fillColor: 'pink',
@@ -88,39 +81,25 @@ var circleMarker = new L.circleMarker([59.753109, -154.91272], {
 	opacity: .8, 
 	fillOpacity: 0.3    
 }).bindPopup("Illiamna, Airport").addTo(map);
-
 	
 //-----PolyLine------
-
 var latlngs = [
     [59.03979, -158.46239],
     [59.24401,-157.65729],
     [59.680974, -157.338245]
 ];
 var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
-
 // zoom the map to the polyline
 map.fitBounds(polyline.getBounds());
 	
 //----Add Rectangle Boundary----
-
-
 var bounds = [[59.03979, -158.46239], [59.64656, -151.54422]];
 L.rectangle(bounds, {color: "#ff7623", weight: 4}).bindPopup('Flight Area: Homer to Illiamna to Dillingham').addTo(map);
 map.fitBounds(bounds);
-
-
-
-
-
-
-
 //----FROM EXAMPLE-----
-
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
-
 var FishingSpots = [
 	[59.03979, -158.46239, "Dillingham"],
 	[59.24401,-157.65729, "Nushagak River"],
@@ -128,21 +107,18 @@ var FishingSpots = [
   [59.25401,-157.65729, "Kuktuli River"],
   
 ];
-
 var Icon1 = L.icon({
     iconUrl: 'http://www.googlemapsmarkers.com/v1/6699ff',
     iconSize:     [21, 34], // size of the icon
     iconAnchor:   [10, 34], // point of the icon which will correspond to marker's location
 	popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
 });
-
 var Icon2 = L.icon({
     iconUrl: 'http://www.googlemapsmarkers.com/v1/ffcc00',
     iconSize:     [21, 34], // size of the icon
     iconAnchor:   [10, 34], // point of the icon which will correspond to marker's location
 	popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
 });
-
 //loop through the array and add a marker for each
 var sMarkers = []
 for (var i = 0; i < fishingSpots.length; i++) {
@@ -151,12 +127,9 @@ for (var i = 0; i < fishingSpots.length; i++) {
 	.addTo(map)
   .on('click', onClick);
 }
-
 //*****************************************************
 //All code below this are functions that work with an event
 //*****************************************************
-
-
 //** 1 Show the names of Fishing Spots on mouse over
 for (var i = 0; i < fishingSpots.length; i++) {
     sMarkers[i].bindPopup(fishingSpots[i][2]);
@@ -167,10 +140,8 @@ for (var i = 0; i < fishingSpots.length; i++) {
             this.closePopup();
         })
 }
-
 //** 2 On click, change the Fishing Spot location to a destination
 var destinations = [];
-
 function onClick(e) {
   popup = e.target.getPopup();
   content = popup.getContent();
@@ -183,7 +154,6 @@ function onClick(e) {
   document.getElementById("itinerary").innerHTML = destinations;
 }
 //Ideally, clicking again would reverse this instead of repeating it.. I can't figure that out.
-
 //** 3 return to full extent by pressing "F" 102
 function full(e){
 //  if (keyPressed.keyCode==70){
@@ -191,7 +161,6 @@ function full(e){
 //  };
 };
 //I can't make this work with just the F key as I had hoped!
-
 //** 4 Start over
 $("#Button").click(function() {
 	for (var i = 0; i < fishingSpots.length; i++) {
@@ -200,9 +169,7 @@ $("#Button").click(function() {
   }
   document.getElementById("itinerary").innerHTML = "";
 });
-
 //** 5 Right click to add additional destinations
-
 map.on('contextmenu',(e) => {
   var marker=L.marker()
   .setLatLng(e.latlng)
@@ -210,12 +177,10 @@ map.on('contextmenu',(e) => {
   .addTo(map)
   .openOn(map);
 });
-
 //** 6 Record zooming or movement
 map.on('zoomend', function(ev) {
 	document.getElementById("nav").innerHTML = "zoomed";
 });
-
 map.on('move', function(ev) {
   document.getElementById("nav").innerHTML = "moved";
 });
