@@ -53,26 +53,31 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 }).addTo(map); 
 //data
 var myPoints = [
-		[1 ,31.5582, -97.1157, "Baylor Bears"],
+		[4 ,31.5582, -97.1157, "Baylor Bears"],
    		[5 ,42.0210, -93.6348, "Iowa State Cyclones"],
-		[1 ,38.9541, -95.2528, "Kansas Jayhawks"],
-		[1 ,39.2004, -96.5938, "Kansas State Wildcats"],
+		[3 ,38.9541, -95.2528, "Kansas Jayhawks"],
+		[2 ,39.2004, -96.5938, "Kansas State Wildcats"],
 		[8 ,36.1267, -97.0650, "Oklahoma State Cowboys"],
-		[8 ,32.7088, -97.3667, "TCU Horned Frogs"],
-		[5 ,30.2772, -97.7330, "Texas Longhorns"],
+		[9 ,32.7088, -97.3667, "TCU Horned Frogs"],
+		[6 ,30.2772, -97.7330, "Texas Longhorns"],
 		[1 ,33.5813, 101.8866, "Texas Tech Red Raiders"],
-		[8 ,39.6493, -79.9816],
-    		[5, 35.1874, -97.4437, "Oklahoma Sooners"],
+		[8 ,39.6493, -79.9816,"West Virginia Mountaineers"],
+    		[8, 35.1874, -97.4437, "Oklahoma Sooners"],
 ];
 //Team rankings 
+
 var breaks = [1, 5, 8,]; 
 var labels = ['good', 'fair', 'poor'];
+
 //set color of marker function
 function getColor(d) {
-	return  d >= breaks[0] ? 'green' :
-	d >= breaks[1] ? "#ffff00" :
-	"red";
+	return  d >= 8 ? 'red' :
+	d >= 5 ? "yellow" :
+	d >= 1 ? "green" :
+	"purple"; //never want to see purple!
+	
 }
+
 for (var i = 0; i < myPoints.length; i++) {
 	marker = new L.circleMarker([myPoints[i][1],myPoints[i][2]], {
 	//radius: myPoints[i][0]/2,
@@ -83,7 +88,7 @@ for (var i = 0; i < myPoints.length; i++) {
 	opacity: 1,
 	fillOpacity: 0.9   
 })
-.bindPopup("Value: "+myPoints[i][0]) //note there is no comma here
+.bindPopup("Team Rank: "+myPoints[i][0]) //note there is no comma here
 .addTo(map);
 }
 var legend = L.control({position: 'bottomright'});
