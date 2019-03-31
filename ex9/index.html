@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   
+    <meta charset="utf-8">
+  
+    <title>Total US Building SF based on Building Activity (2012)</title>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+
+</head>
+
+<body>
+   
+    <script>
+   // Build the chart
+Highcharts.chart('container', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Total Health Care, Lodging, Retail, and Religious Worship Area by Square Footage.'
+    },
+    subtitle: {
+        text: 'Source: U.S. Energy Information Administration, 2012 Commercial Buildings Energy Consumption Survey'
+    },
+
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+       pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+    },
+    series: [{
+        name: 'Average Building Size (Thousand Square Feet)',
+        colorByPoint: true,
+        data: [{
+            name: 'Health Care',
+            y: 84.5,
+            sliced: true,
+            selected: true
+        }, {
+            name: 'Lodging',
+            y: 112.0
+        }, {
+            name: 'Retail',
+            y: 43.0
+        }, {
+            name: 'Religious Worship',
+            y: 34.0
+        }]
+    }]
+});
+    </script>
+    
+</body>
+</html>
