@@ -61,49 +61,54 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 }).addTo(map); 
 //data
 var myPoints = [
-		[0 ,39.2839, -76.6216, "Baltimore Orioles"],
-		[0 ,42.3467, -71.0927, "Boston Red Socks"],
-		[0 ,40.8296, -73.9262, "New York Yankees"],
-		[0 ,27.7682, -82.6534, "Tampa Bay Rays"],
-		[0 ,43.6414, -79.3894, "Toronto Blue Jays"],
-		[1 ,41.8299, -87.6338, "Chicago White Socks"],
-		[1 ,41.4962, -81.6852, "Cleveland Indians"],
-		[1 ,42.3390, -83.0485, "Detroit Tigers"],
-		[1 ,39.0517, -94.4803, "Kansas City Royals"],
-		[1 ,44.9819, -93.2775, "Minnesota Twins"],
-		[2 ,29.7573, -95.3335, "Houston Astros"],
-		[2 ,35.0522, -118.2427, "Los Angeles Angels"],
-		[2 ,37.7509, -122.2003, "Oakland Athletics"],
-		[2 ,47.5914, -122.3325, "Seattle Mariners"],
-		[2 ,32.7512, -97.0832, "Texas Rangers"],
-		[3 ,33.8908, -84.4678, "Atlanta Braves"], 
-		[3 ,25.7781, -80.2197, "Miami Marlins"],
-		[3 ,40.7571, -73.8458, "New York Mets"],
-		[3 ,39.9061, -75.1665, "Philadelphia Phillies"],
-		[3 ,38.8730, -77.0074, "Washington Nationals"],
-		[4 ,41.9498, -87.6553, "Chicago Cubs"],
-		[4 ,39.0979, -84.5082, "Cincinnati Reds"],
-		[4 ,43.0280, -87.9712, "Milwaukee Brewers"],
-		[4 ,40.4469, -80.0057, "Pittsburgh Pirates"],
-		[4 ,38.6226, -90.1928, "St. Louis Cardinals"],
-		[5 ,33.4455, -112.0662, "Arizona Diamondbacks"],
-		[5 ,39.7559, -104.9942, "Colorado Rockies"],
-		[5 ,34.0739, -118.2400, "Los Angeles Dodgers"],
-		[5 ,32.7076, -117.1570, "San Diego Padres"]
+		["AL East" ,39.2839, -76.6216, "Baltimore Orioles"],
+		["AL East" ,42.3467, -71.0927, "Boston Red Socks"],
+		["AL East" ,40.8296, -73.9262, "New York Yankees"],
+		["AL East" ,27.7682, -82.6534, "Tampa Bay Rays"],
+		["AL East" ,43.6414, -79.3894, "Toronto Blue Jays"],
+		["AL Central" ,41.8299, -87.6338, "Chicago White Socks"],
+		["AL Central" ,41.4962, -81.6852, "Cleveland Indians"],
+		["AL Central" ,42.3390, -83.0485, "Detroit Tigers"],
+		["AL Central" ,39.0517, -94.4803, "Kansas City Royals"],
+		["AL Central" ,44.9819, -93.2775, "Minnesota Twins"],
+		["AL West" ,29.7573, -95.3335, "Houston Astros"],
+		["AL West" ,35.0522, -118.2427, "Los Angeles Angels"],
+		["AL West" ,37.7509, -122.2003, "Oakland Athletics"],
+		["AL West" ,47.5914, -122.3325, "Seattle Mariners"],
+		["AL West" ,32.7512, -97.0832, "Texas Rangers"],
+		["NL East" ,33.8908, -84.4678, "Atlanta Braves"], 
+		["NL East" ,25.7781, -80.2197, "Miami Marlins"],
+		["NL East" ,40.7571, -73.8458, "New York Mets"],
+		["NL East" ,39.9061, -75.1665, "Philadelphia Phillies"],
+		["NL East" ,38.8730, -77.0074, "Washington Nationals"],
+		["NL Central" ,41.9498, -87.6553, "Chicago Cubs"],
+		["NL Central" ,39.0979, -84.5082, "Cincinnati Reds"],
+		["NL Central" ,43.0280, -87.9712, "Milwaukee Brewers"],
+		["NL Central" ,40.4469, -80.0057, "Pittsburgh Pirates"],
+		["NL Central" ,38.6226, -90.1928, "St. Louis Cardinals"],
+		["NL West" ,33.4455, -112.0662, "Arizona Diamondbacks"],
+		["NL West" ,39.7559, -104.9942, "Colorado Rockies"],
+		["NL West" ,34.0739, -118.2400, "Los Angeles Dodgers"],
+		["NL West" ,32.7076, -117.1570, "San Diego Padres"],
+		["NL West" ,37.7786, -122.3893, "San Francisco Giants"]
 		
 	
 		 
    	
 ];
 //Team rankings 
-var breaks = [0, 1, 2, 3, 4, 5]; 
-var labels = ['AL East', 'AL Central', 'AL West', 'NL East', 'NL Central', 'NL West'];
+
 //set color of marker function
 function getColor(d) {
-	return  d >= 0 ? 'red' :
-	d >= 2 ? "yellow" :
-	d >= 3 ? "green" :
+	return  d == "AL East" ? '#25d2b0' :
+		d == "AL Central" ? "#eb3e7a" :
+		d == "AL West" ? "#14136a" :
+		d == "NL East" ? "2cd10e" :
+		d == "NL Central" ? "yellow" :
+		d == "NL East"  ? "red" :
 	"purple"; //never want to see purple!
+
+
 	
 }
 for (var i = 0; i < myPoints.length; i++) {
