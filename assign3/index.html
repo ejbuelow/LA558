@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Mapping API's: Leaflet - Introduction to Legends">
+    <title>MLB Teams By Division and Location</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+	
+<style>
+ #map {
+	 height: 600px;
+	 width: 600px;
+	 margin: 50px;
+	 padding: 20px;
+}
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.9;
+}
+.info {
+    padding: 6px 8px;
+    font: 10px/18px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+</style>
+</head>
+
+<body>
+	<h1>MLB Teams by division</h1>
+	<p>2 Leagues: American League (AL) & National League (NL) </p>
+	<p>4 Divisions: AL East, AL Central, AL West & NL East, NL Central, NL West</p> 
+	<p>30 Total MLB Teams
+	<h3>American League</h2>
+	<p>AL East: Baltimore Orioles, Boston Red Socks, New York Yankees, Tampa Bay Rays, Toronto Blue Jays</p>
+	<p>AL Central: Chicago White Socks, Cleveland Indians, Detroit Tigers, Kansas City Royals, Minnesota Twins</p>
+	<p>AL West: Houston Astros, Los Angeles Astros, Oakland Athletics, Seattle Mariners, Texas Rangers</p>
+	<h3>National League</h3>
+	<p>NL East: Atlanta Braves, Miami Marlins, New York Mets, Philadelphia Phillies, Washington Nationals</p>
+	<p>NL Central: Chicago Cubs, Cincinnati Reds, Milwaukee Brewers, Pittsburgh Pirates, St. Louis Cardinals</p>
+	<p>NL West: Arizona Diamond Backs, Colorado Rockies, Los Angeles Dodgers, San Diego Padres, San Francisco Giants</p>
+    <div id="map"></div>
+	
+	
+<script>
+var map = L.map('map').setView([39.8283, -96.5795], 4);
+// add an OpenStreetMap tile layer
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+	attribution: 'The map contributors',
+	maxZoom: 18
+}).addTo(map); 
+//data
+var myPoints = [
+		[0 ,31.5582, -97.1157, "Baylor Bears"],
+   		[1 ,42.0210, -93.6348, "Iowa State Cyclones"],
+		[2 ,38.9541, -95.2528, "Kansas Jayhawks"],
+		[3 ,39.2004, -96.5938, "Kansas State Wildcats"],
+		[4 ,36.1267, -97.0650, "Oklahoma State Cowboys"],
+		[5 ,32.7088, -97.3667, "TCU Horned Frogs"],
+		[6 ,30.2772, -97.7330, "Texas Longhorns"],
+		[1 ,33.5813, 101.8866, "Texas Tech Red Raiders"],
+		[8 ,39.6493, -79.9816,"West Virginia Mountaineers"],
+    		[8, 35.1874, -97.4437, "Oklahoma Sooners"],
+];
+//Team rankings 
+var breaks = [0, 1, 2, 3, 4, 5]; 
+var labels = ['AL East', 'AL Central', 'AL West', 'NL East', 'NL Central', 'NL West'];
+//set color of marker function
+function getColor(d) {
+	return  d >= 0 ? 'red' :
+	d >= 2 ? "yellow" :
+	d >= 3 ? "green" :
+	"purple"; //never want to see purple!
+	
+}
+for (var i = 0; i < myPoints.length; i++) {
+	marker = new L.circleMarker([myPoints[i][1],myPoints[i][2]], {
+	//radius: myPoints[i][0]/2,
+	fillColor: getColor(myPoints[i][0]), 
+	color: "#000",
+	stroke: true,
+	weight: 1,
+	opacity: 1,
+	fillOpacity: 0.9   
+})
+.bindPopup("Team: "+myPoints[i][0]) //note there is no comma here
+.addTo(map);
+}
+var legend = L.control({position: 'bottomright'});
+legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info legend');
+    // loop through items and generate legend items each
+    for (var i = 0; i < breaks.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor(breaks[i]) + ' "></i> ' +
+            labels[i] + (breaks ? '' +  '<br>' : '');
+    }
+    return div;
+};
+legend.addTo(map);
+</script>
+	
+</body>
+</html>
