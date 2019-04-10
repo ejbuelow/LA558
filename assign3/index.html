@@ -37,6 +37,8 @@
 </head>
 
 <body>
+    <div id="map"></div>
+
 	<h1>MLB Teams by division</h1>
 	<p>2 Leagues: American League (AL) & National League (NL) </p>
 	<p>4 Divisions: AL East, AL Central, AL West & NL East, NL Central, NL West</p> 
@@ -49,7 +51,6 @@
 	<p>NL East: Atlanta Braves, Miami Marlins, New York Mets, Philadelphia Phillies, Washington Nationals</p>
 	<p>NL Central: Chicago Cubs, Cincinnati Reds, Milwaukee Brewers, Pittsburgh Pirates, St. Louis Cardinals</p>
 	<p>NL West: Arizona Diamond Backs, Colorado Rockies, Los Angeles Dodgers, San Diego Padres, San Francisco Giants</p>
-    <div id="map"></div>
 	
 	
 <script>
@@ -99,7 +100,7 @@ var myPoints = [
 //Team Divisions 
 //used by color and legend functions to define data breaks
 var breaks = ["AL East", "AL Central", "AL West", "NL East", "NL Central", "NL West"];
-var labels = ["AL East", "AL Central", "AL West", "NL East", "NL Central", "NL West"};
+var labels = ["AL East", "AL Central", "AL West", "NL East", "NL Central", "NL West"];
 //set color of marker function
 //set color of marker function
 function getColor(d) {
@@ -110,8 +111,6 @@ function getColor(d) {
 		d == "NL Central" ? "yellow" :
 		d == "NL West"  ? "red" :
 	"purple"; //never want to see purple!
-
-
 	
 }
 for (var i = 0; i < myPoints.length; i++) {
