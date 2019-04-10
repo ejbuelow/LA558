@@ -1,152 +1,109 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-   
-    <meta charset="utf-8">
-  
-    <title>MLB Teams by Fanbase</title>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
+	
+	<title>MLB Stadium Location and Names</title>
 
-<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
 
 
+	<style>
+		html, body {
+			height: 100%;
+			margin: 100;
+			padding: 100;
+		}
+		#map {
+			width: 600px;
+			height: 400px;
+		}
+	</style>
+
+	
 </head>
-
 <body>
-   
-    <script>
-   // Build the chart
-Highcharts.chart('container', {
-    chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: 500,
-        plotShadow: true,
-        type: 'pie'
-    },
-    title: {
-        text: 'MLB Teams by Fanbase'
-    },
-    subtitle: {
-        text: 'United States of American Poll of Fan Population'
+	<h1>MLB Stadiums Names and Locations</h1>
+	<br>
+	<p>This map is intended to show the locations and names of all the MLB stadiums.</p>
+	<br>
+	<h3>Link to next webpage</h3>
+	<p>https://ejbuelow.github.io/LA558/assign3/highcart.html</p>
 
-    },
+<div id='map'></div>
 
-    tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-    plotOptions: {
-       pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: false
-            },
-            showInLegend: true
-        }
-    },
-    series: [{
-        name: 'Total Fanbase in 2016',
-        colorByPoint: true,
-        data: [{
-            name: 'New York Yankees',
-            y: 10.86,
-            sliced: true,
-            selected: true
-        }, {
-            name: 'Atlanta Braves',
-            y: 9.27
-        }, {
-            name: 'Boston Red Socks',
-            y: 9.18
-        }, {
-            name: 'Chicago Cubs',
-            y: 8.14
-	}, { 
-	    name: 'San Francisco Giants',
-	    y: 5.07
-	}, {
-	    name: 'Texas Rangers',
-	    y: 4.69
-	}, {
-	    name: 'St. Louis Cardinals',
-	    y: 3.99
-	}, {
-	    name: 'Los Angeles Dodgers',
-	    y: 3.72
-	}, {
-	    name: 'Detroit Tigers',
-	    y: 3.47
-	}, {
-	    name: 'New York Mets',
-	    y: 3.47
-	}, {
-	    name: 'Houston Astros',
-	    y: 3.03
-	}, {
-	    name: 'Los Angeles Angels',
-	    y: 2.94
-	}, {
-	    name: 'Seattle Mariners',
-	    y: 2.71
-	}, {
-	    name: 'Philadelphia Phillies',
-	    y: 2.65
-	}, {
-	    name: 'Cincinnati Reds',
-	    y: 2.33
-	}, {
-	    name: 'Kansas City Royals',
-	    y: 2.20
-	}, {
-	    name: 'Baltimore Orioles',
-	    y: 2.10
-	}, {
-	    name: 'Colorado Rockies',
-	    y: 2.07
-	}, {
-	    name: 'Minnesota Twins',
-	    y: 2.06
-	}, {
-	    name: 'Cleveland Indians',
-	    y: 1.98
-	}, {
-	    name: 'Pittsburgh Pirates',
-	    y: 1.90
-	}, {
-	    name: 'Arizona Diamondbacks',
-	    y: 1.85
-	}, {
-	    name: 'Milwaukee Brewers',
-	    y: 1.81
-	}, {
-	    name: 'Oakland Athletics',
-	    y: 1.71
-	}, {
-	    name: 'San Diego Padres',
-	    y: 1.52
-	}, {
-	    name: 'Chicago White Sox',
-	    y: 1.39
-	}, {
-	    name: 'Washington Nationals',
-	    y: 1.28
-	}, {
-	    name: 'Tampa Bay Rays',
-	    y: 1.26
-	}, {
-	    name: 'Miami Marlins',
-	    y: 1.15
-	}, {
-	    name: 'Toronto Blue Jays*',
-	    y: 0.10
-        }]
-    }]
-});
-    </script>
-    
+<script>
+	var stadiums = L.layerGroup();
+
+	L.marker([39.2839, -76.6216]).bindPopup('Baltimore Orioles play at Oriole Park at Camden Yards').addTo(stadiums),
+	L.marker([42.3467, -71.0927]).bindPopup('Boston Red Socks play at Fenway Park').addTo(stadiums),
+	L.marker([40.8296, -73.9262]).bindPopup('New York Yankees play at Yankee Stadium').addTo(stadiums),
+	L.marker([27.7682, -82.6534]).bindPopup('Tampa Bay Rays play at Tropicana Field').addTo(stadiums),
+	L.marker([43.6414, -79.3894]).bindPopup('Toronto Blue Jays play at Rogers Centre').addTo(stadiums),
+	L.marker([41.8299, -87.6338]).bindPopup('Chicago White Sox play at Guaranteed Rate Field').addTo(stadiums),
+	L.marker([41.4962, -81.6852]).bindPopup('Cleveland Indians play at Progressive Field').addTo(stadiums),
+	L.marker([42.3390, -83.0485]).bindPopup('Detroit Tigers play at Comerica Park').addTo(stadiums),
+	L.marker([39.0517, -94.4803]).bindPopup('Kansas City Royals play at Kauffman Stadium').addTo(stadiums),
+	L.marker([44.9819, -93.2775]).bindPopup('Minnesota Twins play at Target Field').addTo(stadiums),
+	L.marker([29.7573, -95.3335]).bindPopup('Houston Astros play at Minute Maid Park').addTo(stadiums),
+	L.marker([35.0522, -118.2427]).bindPopup('Los Angeles Angels play at Angel Stadium of Anaheim').addTo(stadiums),
+	L.marker([37.7509, -122.2003]).bindPopup('Oakland Athletics play at Oakland-Alameda County Coliseum').addTo(stadiums),
+	L.marker([47.5914, -122.3325]).bindPopup('Seattle Mariners play at T-Mobile Park').addTo(stadiums),
+	L.marker([32.7512, -97.0832]).bindPopup('Texas Rangers play at Globe Life Park in Arlington').addTo(stadiums),
+	L.marker([33.8908, -84.4678]).bindPopup('Atlanta Braves play at SunTrust Park').addTo(stadiums),
+	L.marker([25.7781, -80.2197]).bindPopup('Miami Marlins play at Marlins Park').addTo(stadiums),
+	L.marker([40.7571, -73.8458]).bindPopup('New York Mets play at Citi Field').addTo(stadiums),
+	L.marker([39.9061, -75.1665]).bindPopup('Philadelphia Phillies play at Citizens Bank Park').addTo(stadiums),
+	L.marker([38.8730, -77.0074]).bindPopup('Washington Nationals play at Nationals Park').addTo(stadiums),
+	L.marker([41.9498, -87.6553]).bindPopup('Chicago Cubs play at Wrigley Field').addTo(stadiums),
+	L.marker([39.0979, -84.5082]).bindPopup('Cincinnati Reds play at Great American Ball Park').addTo(stadiums),
+	L.marker([43.0280, -87.9712]).bindPopup('Milwaukee Brewers play at Miller Park').addTo(stadiums),
+	L.marker([40.4469, -80.0057]).bindPopup('Pittsburgh Pirates play at PNC Park').addTo(stadiums),
+	L.marker([38.6226, -90.1928]).bindPopup('St. Louis Cardinals play at Busch Stadium').addTo(stadiums),
+	L.marker([33.4455, -112.0662]).bindPopup('Arizona Diamondbacks play at Chase Field').addTo(stadiums),
+	L.marker([39.7559, -104.9942]).bindPopup('Colorado Rockies play at Coors Field').addTo(stadiums),
+	L.marker([34.0739, -118.2400]).bindPopup('Los Angeles Dodgers play at Dodger Stadium').addTo(stadiums),
+	L.marker([32.7076, -117.1570]).bindPopup('San Diego Padres play at Petco Park').addTo(stadiums),
+	L.marker([37.7786, -122.3893]).bindPopup('San Francisco Giants play at Oracle Park').addTo(stadiums);
+
+
+
+	var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+
+	var grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr}),
+		streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr});
+
+	var map = L.map('map', {
+		center: [39.8283, -98.5795],
+		zoom: 4,
+		layers: [grayscale, stadiums]
+	});
+
+	var baseLayers = {
+		"Grayscale": grayscale,
+		"Streets": streets
+	};
+
+	var overlays = {
+		"stadiums": stadiums
+	};
+
+	L.control.layers(baseLayers, overlays).addTo(map);
+
+
+
+
+</script>
+
+
+
 </body>
 </html>
