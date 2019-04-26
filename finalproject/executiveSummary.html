@@ -1,2 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
 
-FLEM.
+	<title>Candidate Locations</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+	
+<style>
+
+	html, body {
+		height: 100%;
+		margin: 0;
+	}
+
+ 	 #map {
+	 height: 300px;
+	 width: 600px;
+	 margin: 50px;
+	 padding: 20px;
+	}
+
+
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.9;
+}
+.info {
+    padding: 6px 8px;
+    font: 10px/18px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+</style>
+</head>
+
+<body>
+    
+
+	<h1>Candidate Locations</h1>
+	<h3>Population & Growth</h3>
+
+
+	<p>https://ejbuelow.github.io/LA558/assign3/highcart.html</p>
+	
+	<div id="map"></div>
+	
+	
+<script>
+var map = L.map('map').setView([39.8283, -96.5795], 4);
+// add an OpenStreetMap tile layer
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+	attribution: 'The map contributors',
+	maxZoom: 18
+}).addTo(map); 
+//data
+var myPoints = [
+		["Bend, OR" ,44.0582, -121.3153, "94,520", "4.31%"],
+		["Dallas-Fort Worth-Arlington, TX" ,32.7079, -96.9209, "1,341,075", "1.43%"],
+		["Fargo, ND/MD" ,46.8772, -96.7879, "122,359", "1.66%"],
+	
+		
+	
+		 
+   	
+];
+//Team Divisions 
+//used by color and legend functions to define data breaks
+var breaks = ["1", "2", "3", "4", "5", "6"];
+var labels = ["1", "AL Central", "AL West", "NL East", "NL Central", "NL West"];
+//set color of marker function
+//set color of marker function
+function getColor(d) {
+	return  d == "AL East" ? '#25d2b0' :
+		d == "AL Central" ? "#eb3e7a" :
+		d == "AL West" ? "#e13def" :
+		d == "NL East" ? "blue" :
+		d == "NL Central" ? "yellow" :
+		d == "NL West"  ? "red" :
+	"purple"; //never want to see purple!
+	
+}
+for (var i = 0; i < myPoints.length; i++) {
+	marker = new L.circleMarker([myPoints[i][1],myPoints[i][2]], {
+	//radius: myPoints[i][0]/2,
+	fillColor: getColor(myPoints[i][0]), 
+	color: "#000",
+	stroke: true,
+	weight: 1,
+	opacity: 1,
+	fillOpacity: 0.9   
+})
+.bindPopup("Candidate Location: "+myPoints[i][0]) //note there is no comma here
+.bindPopup("2017 Population: "+myPoints[i][3])
+.addTo(map);
+}
+var legend = L.control({position: 'bottomright'});
+legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info legend');
+    // loop through items and generate legend items each
+    for (var i = 0; i < breaks.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor(breaks[i]) + ' "></i> ' +
+            labels[i] + (labels ? '' +  '<br>' : '');
+    }
+    return div;
+};
+legend.addTo(map);
+</script>
+	
+</body>
+</html>
