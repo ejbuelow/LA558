@@ -4,15 +4,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 * {box-sizing: border-box}
-
-
 /* Set height of body and the document to 100% */
 body, html {
   height: 100%;
   margin: 0;
   font-family: Arial;
 }
-
 /* Style tab links */
 .tablink {
   background-color: #555;
@@ -25,11 +22,9 @@ body, html {
   font-size: 17px;
   width: 25%;
 }
-
 .tablink:hover {
   background-color: #802b2b;
 }
-
 /* Style the tab content (and add height:100% for full page content) */
 .tabcontent {
   color: #802b2b;
@@ -37,7 +32,6 @@ body, html {
   padding: 100px 20px;
   height: 100%;
 }
-
 #Executive Summary {background-color: #dfdcdc;}
 #Labor Analysis Approach {background-color: #d0cfcf;}
 #Location Comparison {background-color: #c0bfbf;}
@@ -58,6 +52,161 @@ body, html {
   	<p>The three candidate locations are as follows: Dallas-Fort Worth-Arlington, TX; Fargo, ND/MD, and Bend, OR were all assessed from an Economic and Non-Economic perspective.</p>
 <p>•	Economic: Cost of operating the parking lot considering the recurring costs of labor and real estate.</p>
 <p>•	Non-Economic: Desirability of the prevailing business climate including the ability to scale and sustain operations.</p>
+
+
+
+<head>
+
+	<title>Candidate Locations</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+	
+<style>
+
+
+	html, body {
+		height: 100%;
+		margin: 50px;
+		padding: 20;
+		
+	}
+
+ 	 #map {
+	 height: 300px;
+	 width: 600px;
+	 margin: 0px;
+	 padding: 20px;
+	}
+
+}
+
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.9;
+}
+.info {
+    padding: 6px 8px;
+    font: 10px/18px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+
+</style>
+</head>
+
+<body>
+    
+
+
+	<h3>Candidate Locations</h1>
+	
+
+
+	<p>This page will give a brief overview of each of the candidate locations, and a breakdown of how we will be evaluating each location to fit our clients needs.</p>
+
+	
+	<div id="map"></div>
+<br></br>
+<br></br>
+	
+
+	<h3>Evaluation Criteria</h3>
+<p>The above candidate locations in the U.S. were assessed from an Economic and Non-Economic perspective, and reviewed within a single analytical framework that enables visibility into the trade-offs to be made between each consideration. 
+</p>
+
+
+<img src="https://ejbuelow.github.io/LA558/finalproject/evaluationFramework458.png" alt="Evaluation Framework" style ="width:550px;height:450px;float:center;">
+
+<br></br>
+
+
+
+
+
+
+	
+<script>
+var map = L.map('map').setView([39.8283, -96.5795], 4);
+// add an OpenStreetMap tile layer
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+	attribution: 'The map contributors',
+	maxZoom: 18
+}).addTo(map); 
+//data
+var myPoints = [
+		["Bend, OR" ,44.0582, -121.3153, "94,520", "4.31%"],
+		["Dallas-Fort Worth-Arlington, TX" ,32.7079, -96.9209, "1,341,075", "1.43%"],
+		["Fargo, ND/MD" ,46.8772, -96.7879, "122,359", "1.66%"],
+	
+		
+	
+		 
+   	
+];
+//Team Divisions 
+//used by color and legend functions to define data breaks
+var breaks = ["Under 100K", "100K-200K", "200k-500k", "Greater than 500K"];
+var labels = ["Under 100K", "100K-200K", "200k-500k", "Greater than 500K"];
+//set color of marker function
+//set color of marker function
+function getColor(d) {
+	return  d == "Under 100K" ? '#25d2b0' :
+		d == "100K to 200K" ? "#eb3e7a" :
+		d == "200K-500K" ? "#e13def" :
+		d == "Greater than 500K" ? "blue" :
+	"purple"; //never want to see purple!
+	
+}
+for (var i = 0; i < myPoints.length; i++) {
+	marker = new L.circleMarker([myPoints[i][1],myPoints[i][2]], {
+	//radius: myPoints[i][0]/2,
+	fillColor: getColor(myPoints[i][0]), 
+	color: "#000",
+	stroke: true,
+	weight: 1,
+	opacity: 1,
+	fillOpacity: 0.9   
+})
+.bindPopup("Candidate Location: "+myPoints[i][0]) //note there is no comma here
+
+.addTo(map);
+}
+var legend = L.control({position: 'bottomright'});
+legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info legend');
+    // loop through items and generate legend items each
+    for (var i = 0; i < breaks.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor(breaks[i]) + ' "></i> ' +
+            labels[i] + (labels ? '' +  '<br>' : '');
+    }
+    return div;
+};
+legend.addTo(map);
+</script>
+	
+</body>
+</html>
+
+
+
+
 <br></br>
 <br></br>  
 	<h3>In-Scope Markets</h3>
@@ -65,19 +214,190 @@ body, html {
 	<br></br>
 Below is a diagram that breaks down the different In-Scope markets of interest into a weighting system that allows the client to make a knowledgeable decision about their new partnership. The criteria are specific to parking lots, as well as selling the property in the future for maximum revenue. </p>
 <br></br>
+
+
+
+<html>
+<head>
+<style>
+table {
+ font-family: Calibri, sans-serif, bold;
+ border-collapse: collapse;
+ width: 100%;
+}
+
+td, th {
+ border: 3px solid #000000;
+ text-align: left;
+ padding: 6px;
+}
+
+tr:nth-child(even) {
+ background-color: #F8DEEA
+}
+
+</style>
+</head>
+<body>
+
+
+<table>
+ <tr>
+  <th>City</th>
+  <th>Households</th>
+  <th>Population (2017)</th>
+  <th>Population Growth</th>
+ </tr>
+ <tr>
+  <td>Bend, OR</td>
+  <td>38,970</td>
+  <td>94,520</td>
+  <td>4.31%</td>
+ </tr>
+ <tr>
+  <td>Fargo ND/MN</td>
+  <td>56,719</td>
+  <td>122,359</td>
+  <td>1.66%</td>
+ </tr>
+ <tr>
+  <td>Dallas-Fort Worth-Arlington</td>
+  <td>2,494,426</td>
+  <td>6.8 million</td>
+  <td>1.42%</td>
+ </tr>
+
+</table>
+
+</body>
+</html>
+
+
+
+
 <br></br> 
 	<h3>Results and Recommendations</h3>
-	<p>The graphic illustrates the trade-offs to be made for each location from economic and non-economic perspectives.  Top performing locations are found in the upper right quadrant.</p>
+	<p>The graphic illustrates the trade-offs to be made for each location from economic and non-economic perspectives.  Top performing locations are found in the upper right quadrant.</p>
 <br></br>
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+  
+    <title>Results & Recommendations</title>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+
+<div id="container" style="min-width: 310px; max-width: 600px; height: 600px; margin: 0 auto;"></div>
+
+</head>
+
+<body>
+
+<script>
+Highcharts.chart('container', {
+
+    chart: {
+        type: 'bubble',
+	plotBackgroundColor: null,
+        plotBorderWidth: 3,
+	plotBorderColor: "#802b2b",
+        zoomType: 'xy'
+    },
+
+    title: {
+        text: 'Results & Recommendations'
+    },
+    subtitle: {
+	text: 'Candidate Locations Economic & Non-Economic Comparison'
+    },
+
+    xAxis: {
+        gridLineWidth: 1,
+	
+    },
+
+    yAxis: {
+        startOnTick: false,
+        endOnTick: false
+    },
+
+    series: [{
+	name: 'Dallas, TX',
+        data: [
+            [3.6, 1.75, 1.43]
+
+        ],
+        marker: {
+            fillColor: {
+                radialGradient: { cx: 0.4, cy: 0.3, r: 0.7 },
+                stops: [
+                    [0, 'rgba(255,255,255,0.5)'],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0.5).get('rgba')]
+                ]
+            }
+        }
+    }, {
+	name: 'Fargo, ND/MN',
+        data: [
+            [3.9, 2.5, 1.66]
+        ],
+        marker: {
+            fillColor: {
+                radialGradient: { cx: 0.4, cy: 0.3, r: 0.7 },
+                stops: [
+                    [0, 'rgba(247,198,198,0.5)'],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[1]).setOpacity(0.5).get('rgba')]
+                ]
+            }
+        }
+    },
+{
+	name: 'Bend, OR',
+        data: [
+            [3.35, 3.6, 4.31]
+        ],
+        marker: {
+            fillColor: {
+                radialGradient: { cx: 0.4, cy: 0.3, r: 0.7 },
+                stops: [
+                    [0, 'rgba(128,43,43,0.5)'],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[1]).setOpacity(0.5).get('rgba')]
+                ]
+            }
+        }
+    }]
+
+});
+
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
 <br></br> 
 	<h3>Recommendations & Next Steps</h3>
 	<p>Summary of each of the candidate locations	FINAL GRADING %</p>
 	<br></br>
-	<p>Scalability: These markets scored best from a scalability perspective.  Albuquerque is the largest candidate market in terms of target job skills and demographic.  Colorado Springs offers the optimal concentration of target job skills aligned with the U.S. average and largest target demographic concentration reflecting a workforce and population aligned with Emerald’s requirements.
+	<p>Scalability: These markets scored best from a scalability perspective.  Albuquerque is the largest candidate market in terms of target job skills and demographic.  Colorado Springs offers the optimal concentration of target job skills aligned with the U.S. average and largest target demographic concentration reflecting a workforce and population aligned with Emerald’s requirements.
 	<br></br>
-	<p>Sustainability: Both markets performed well on sustainability measures and displayed a decrease in customer service wages over the past three years indicating a controlled cost environment.  Albuquerque displays the highest bilingual workforce indicators and Colorado Springs offers positive, but controlled growth of target job skills.<p/>
+	<p>Sustainability: Both markets performed well on sustainability measures and displayed a decrease in customer service wages over the past three years indicating a controlled cost environment.  Albuquerque displays the highest bilingual workforce indicators and Colorado Springs offers positive, but controlled growth of target job skills.<p/>
 	<br></br>
-	<p>Business Environment: Albuquerque and Colorado Springs both currently have 10+ available real estate options that meet Emerald’s requirements.  There are nonstop flights (though limited availability) to Atlanta from both top performing markets.  Albuquerque scored highest from an incentives perspective as a result of the large grant awards available in New Mexico.</p>
+	<p>Business Environment: Albuquerque and Colorado Springs both currently have 10+ available real estate options that meet Emerald’s requirements.  There are nonstop flights (though limited availability) to Atlanta from both top performing markets.  Albuquerque scored highest from an incentives perspective as a result of the large grant awards available in New Mexico.</p>
 <br></br>
 <br></br>
 	<h3>Performance Matrix</h3>
@@ -121,12 +441,307 @@ Below is a diagram that breaks down the different In-Scope markets of interest i
 	Ranking of each options (Best to Worst) based on Economic (Avg. Annual Salary + Avg. Annual Rent = Cost per head/employee, other operating expenses? ) for each candidate location. Including a graphic, comparing the avg. scores for each category and final score. 
 BAR GRAPH	TABLE (BREAKDOWN)</p>
 <br></br>
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	
+	<meta charset="utf-8">
+
+	<title>Location Comparison</title>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+<div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+</head>
+
+<body>
+
+	<script>
+
+Highcharts.chart('container1', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Non-Economic Comparison'
+    },
+    
+    xAxis: {
+        categories: ['Dallas-Fort Worth-Arlington, TX', 'Fargo, ND/MN', 'Bend, OR']
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Non-Economic Rating'
+        },
+        stackLabels: {
+            enabled: true,
+            style: {
+                fontWeight: 'bold',
+                color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+            }
+        }
+    },
+    legend: {
+        align: 'right',
+        x: -30,
+        verticalAlign: 'top',
+        y: 25,
+        floating: true,
+        backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+        borderColor: '#CCC',
+        borderWidth: 1,
+        shadow: false
+    },
+    tooltip: {
+        headerFormat: '<b>{point.x}</b><br/>',
+        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+    },
+    plotOptions: {
+        column: {
+            stacking: 'normal',
+            dataLabels: {
+                enabled: true,
+                color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+            }
+        }
+    },
+    series: [{
+        name: '2016 Vehicles per Household',
+        data: [1.2, 1.4, 1.2]
+    }, {
+        name: 'Educational Attainment',
+        data: [0.7, 0.8, 0.8]
+    }, {
+        name: 'Households',
+        data: [0.6, 0.8, 0.5]
+    }, {
+	name:'Average Salary',
+	data: [0.8, 0.7, 0.7]
+    }]
+});
+
+	</script>
+
+<p>The above graphic represents data our criteria and wighting system for each category of data. Each category of data is weighted to determine importance in establishing a successful and profitable parking lot.</p>
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
 <br></br>
 	<h3>Economic Comparison</h3>
 	<p>Insights:</p>
 <br></br>
 	<p>Ranking of each options (Best to Worst) based on Economic (Avg. Annual Salary + Avg. Annual Rent = Cost per head/employee, other operating expenses? ) for each candidate location. Including a graphic, comparing the avg. scores for each category and final score. 
 BAR GRAPH	TABLE (BREAKDOWN)</p>
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	
+	<meta charset="utf-8">
+
+	<title>Location Comparison</title>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+<div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+</head>
+
+<body>
+
+	<script>
+
+Highcharts.chart('container2', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Economic Comparison'
+
+    },
+    xAxis: {
+        categories: ['Dallas-Fort Worth-Arlington, TX', 'Fargo, ND/MN', 'Bend, OR']
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Economic Rating'
+        },
+        stackLabels: {
+            enabled: true,
+            style: {
+                fontWeight: 'bold',
+                color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+            }
+        }
+    },
+    legend: {
+        align: 'right',
+        x: -30,
+        verticalAlign: 'top',
+        y: 25,
+        floating: true,
+        backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+        borderColor: '#CCC',
+        borderWidth: 1,
+        shadow: false
+    },
+    tooltip: {
+        headerFormat: '<b>{point.x}</b><br/>',
+        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+    },
+    plotOptions: {
+        column: {
+            stacking: 'normal',
+            dataLabels: {
+                enabled: true,
+                color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+            }
+        }
+    },
+    series: [{
+        name: 'Current Population',
+        data: [0.3, 0.7, 0.6]
+    }, {
+        name: 'Annual Growth Rate',
+        data: [0.6, 0.8, 1.6]
+    }, {
+        name: 'Avgerage Rental Rate',
+        data: [1, 1.2, 1]
+    }]
+});
+
+	</script>
+
+<p>The above graphic represents data our criteria and wighting system for each category of data. Each category of data is weigted </p>
+
+
+
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	
+	<meta charset="utf-8">
+
+	<title>Location Comparison</title>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+<div id="container3" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+</head>
+
+<body>
+
+	<script>
+
+Highcharts.chart('container3', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Location Comparison'
+    },
+    subtitle: {
+	text: 'Economic Comparison'
+
+    },
+    xAxis: {
+        categories: ['Dallas-Fort Worth-Arlington, TX', 'Fargo, ND/MN', 'Bend, OR']
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Overall Rating'
+        },
+        stackLabels: {
+            enabled: true,
+            style: {
+                fontWeight: 'bold',
+                color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+            }
+        }
+    },
+    legend: {
+        align: 'right',
+        x: -30,
+        verticalAlign: 'top',
+        y: 25,
+        floating: true,
+        backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+        borderColor: '#CCC',
+        borderWidth: 1,
+        shadow: false
+    },
+    tooltip: {
+        headerFormat: '<b>{point.x}</b><br/>',
+        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+    },
+    plotOptions: {
+        column: {
+            stacking: 'normal',
+            dataLabels: {
+                enabled: true,
+                color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+            }
+        }
+    },
+    series: [{
+	name: 'Non-Economic Rating',
+        data: [3.3, 3.7, 3.2]
+    }, {
+        name: 'Economic Rating',
+        data: [1.9, 2.7, 3.4]
+    }]
+});
+
+	</script>
+
+<p>The above graphic represents data our criteria and wighting system for each category of data. Each category of data is weighted to determine importance in establishing a successful and profitable parking lot.</p>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
 	
 	
 </div>
@@ -162,12 +777,12 @@ function openPage(pageName,elmnt,color) {
   document.getElementById(pageName).style.display = "block";
   elmnt.style.backgroundColor = color;
 }
-
-
-
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 </script>
    
 </body>
-</html> 
+</html>
+
+
+
