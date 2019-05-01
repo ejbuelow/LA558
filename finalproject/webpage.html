@@ -754,9 +754,122 @@ Highcharts.chart('container3', {
 	<h3>Dallas-Fort Worth-Arlington, TX</h3>
 	<p>Summary, Images, Graphics, Important facts(Table) to show the market overview for each location.  </p>
 <br></br>
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Mapping API's: Leaflet - Introduction to Legends">
+    <title>Dallas-Fort Worth-Arlington, TX</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+	
+<style>
+ #map2 {
+	 height: 250px;
+	 width: 250px;
+	 margin: 10px;
+	 padding: 10px;
+	 float: left;
+}
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.9;
+}
+.info {
+    padding: 6px 8px;
+    font: 10px/18px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+</style>
+</head>
+
+<body>
+
+
+    <div id="map2"></div>
+	
+	
+<script>
+var map2 = L.map('map2').setView([32.7079, -96.9209], 7);
+// add an OpenStreetMap tile layer
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+	attribution: 'The map contributors',
+	maxZoom: 18
+}).addTo(map2); 
+//data
+
+
+var latlngs = [
+	[33.4325, -97.9070], 
+	[32.9959, -97.9180], 
+	[33.0005, -98.0511], 
+	[32.5085, -98.0691], 
+	[32.0837, -97.8658], 
+	[32.2017, -97.6152], 
+	[32.1726, -97.6001], 
+	[32.1761, -97.5699], 
+	[32.1494, -97.5671], 
+	[32.1366, -97.5053], 
+	[32.1598, -97.5094], 
+	[32.2632, -97.0851], 
+	[32.0505, -96.9381], 
+	[32.3283, -96.3833], 
+	[32.3467, -96.4506], 
+	[32.3586, -96.4518], 
+	[32.3567, -96.0750], 
+	[32.8371, -96.0699], 
+	[32.8348, -95.9326], 
+	[32.8706, -95.9847], 
+	[32.9778, -95.9422],
+	[32.9766, -95.8625], 
+	[33.4076, -95.8584], 
+	[33.3411, -96.3816], 
+	[33.3961,  -96.3844]
+];
+var polygons = L.polygon(latlngs, {color: 'red'}).addTo(map2);
+map.fitBounds(polygon.getBounds());
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
+
+
 <br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+
+
+
 	<h3>Bend, OR</h3>
 	<p>Summary, Images, Graphics, Important facts(Table) to show the market overview for each location.  </p>
+
+
+
 <br></br>
 <br></br>
 	<h3>Fargo, ND/MN</h3>
@@ -783,6 +896,4 @@ document.getElementById("defaultOpen").click();
    
 </body>
 </html>
-
-
 
