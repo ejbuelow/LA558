@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	
+	<meta charset="utf-8">
+
+	<title>Location Comparison</title>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+</head>
+
+<body>
+
+	<script>
+
+Highcharts.chart('container', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Location Comparison'
+    },
+    subtitle: {
+	text: 'Non-Economic Comparison'
+
+    },
+    xAxis: {
+        categories: ['Dallas-Fort Worth-Arlington, TX', 'Fargo, ND/MN', 'Bend, OR']
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Non-Economic Rating'
+        },
+        stackLabels: {
+            enabled: true,
+            style: {
+                fontWeight: 'bold',
+                color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+            }
+        }
+    },
+    legend: {
+        align: 'right',
+        x: -30,
+        verticalAlign: 'top',
+        y: 25,
+        floating: true,
+        backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+        borderColor: '#CCC',
+        borderWidth: 1,
+        shadow: false
+    },
+    tooltip: {
+        headerFormat: '<b>{point.x}</b><br/>',
+        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+    },
+    plotOptions: {
+        column: {
+            stacking: 'normal',
+            dataLabels: {
+                enabled: true,
+                color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+            }
+        }
+    },
+    series: [{
+        name: '2016 Vehicles per Household',
+        data: [1.2, 1.4, 1.2]
+    }, {
+        name: 'Educational Attainment',
+        data: [0.7, 0.8, 0.8]
+    }, {
+        name: 'Households',
+        data: [0.6, 0.8, 0.5]
+    }, {
+	name:'Average Salary',
+	data: [0.8, 0.7, 0.7]
+    }]
+});
+
+	</script>
+
+<p>The above graphic represents data our criteria and wighting system for each category of data. Each category of data is weighted to determine importance in establishing a successful and profitable parking lot.</p>
+
+
+
+
+</body>
+</html>
+
