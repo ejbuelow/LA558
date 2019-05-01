@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+  
+    <title>Results & Recommendations</title>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+
+<div id="container" style="min-width: 310px; max-width: 600px; height: 600px; margin: 0 auto;"></div>
+
+</head>
+
+<body>
+
+<script>
+Highcharts.chart('container', {
+
+    chart: {
+        type: 'bubble',
+	plotBackgroundColor: null,
+        plotBorderWidth: 3,
+	plotBorderColor: "#802b2b",
+        zoomType: 'xy'
+    },
+
+    title: {
+        text: 'Results & Recommendations'
+    },
+    subtitle: {
+	text: 'Candidate Locations Economic & Non-Economic Comparison'
+    },
+
+    xAxis: {
+        gridLineWidth: 1,
+	
+    },
+
+    yAxis: {
+        startOnTick: false,
+        endOnTick: false
+    },
+
+    series: [{
+	name: 'Dallas, TX',
+        data: [
+            [3.6, 1.75, 1.43]
+
+        ],
+        marker: {
+            fillColor: {
+                radialGradient: { cx: 0.4, cy: 0.3, r: 0.7 },
+                stops: [
+                    [0, 'rgba(255,255,255,0.5)'],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0.5).get('rgba')]
+                ]
+            }
+        }
+    }, {
+	name: 'Fargo, ND/MN',
+        data: [
+            [3.9, 2.5, 1.66]
+        ],
+        marker: {
+            fillColor: {
+                radialGradient: { cx: 0.4, cy: 0.3, r: 0.7 },
+                stops: [
+                    [0, 'rgba(247,198,198,0.5)'],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[1]).setOpacity(0.5).get('rgba')]
+                ]
+            }
+        }
+    },
+{
+	name: 'Bend, OR',
+        data: [
+            [3.35, 3.6, 4.31]
+        ],
+        marker: {
+            fillColor: {
+                radialGradient: { cx: 0.4, cy: 0.3, r: 0.7 },
+                stops: [
+                    [0, 'rgba(128,43,43,0.5)'],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[1]).setOpacity(0.5).get('rgba')]
+                ]
+            }
+        }
+    }]
+
+});
+
+
+
+</script>
+</body>
+</html>
