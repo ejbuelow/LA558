@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {box-sizing: border-box}
+/* Set height of body and the document to 100% */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial;
+}
+/* Style tab links */
+.tablink {
+  background-color: #C0C0C0;
+  color: white;
+  float: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 33%;
+}
+.tablink:hover {
+  background-color: #802b2b;
+}
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+  color: #802b2b;
+  display: none;
+  padding: 100px 20px;
+  height: 100%;
+}
+Executive Summary {background-color: #dfdcdc;}
+Location Comparison {background-color: #c0bfbf;}
+Market Overview {background-color: #abaaaa;}
+</style>
+</head>
+<body>
+
+
+<button class="tablink" onclick="openPage('Executive Summary', this, '#d0cfcf')" id="defaultOpen">Executive Summary</button>
+<button class="tablink" onclick="openPage('Location Comparison', this, '#c0bfbf')">Location Comparison</button>
+<button class="tablink" onclick="openPage('Market Overview', this, '#abaaaa')">Market Overview</button>
+
+
+<div id="Executive Summary" class="tabcontent">
+  
+<head>
+
+	<title>Candidate Locations</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+	
+<style>
+
+
+	html, body {
+		height: 100%;
+		margin: 50px;
+		padding: 20;
+		
+	}
+
+ 	 #map {
+	 height: 300px;
+	 width: 600px;
+	 Margin: 250px;
+	 padding: 20px;
+	 margin-right: 50px;
+	
+	}
+
+}
+
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.9;
+}
+.info {
+    padding: 6px 8px;
+    font: 10px/18px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+
+</style>
+</head>
+
+<body>
+    
+
+
+	<h1  align="center">Candidate Locations</h1>
+	
+
+
+	<p align="center">Park N' Lot, llc helps clients pick the most profitable city to start their own parking lot franchise. To demonstrate our process, we have chosen three unique US cities. The following are the candidate locations: Dallas, TX; Bend, OR; Fargo, ND. This tab will mostly serve as a demonstration of our process, and how our process helps us generate the best results for our clients. Below is a map of the United States with each point representing a candidate location, this map will also show the different populations of each site. </p>
+
+	
+	<div id="map"></div>
+<br></br>
+<br></br>
+	
+
+	<h1  align="center">Evaluation Criteria</h3>
+
+<p align="center">We have created a evaluation framework that helps us establish various aspects of a key site. We consider both economic and non-economic factors to be extremely important when considering the success of ones franchise. For Economic evaluation we consider the price of land and cost of employment as well as the expected revenue and risk of the specific project. </p>
+
+<br></br>
+
+
+
+
+
+<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+	height: 400px;
+	width: 500px;
+}
+</style>
+
+
+
+<img src="https://ejbuelow.github.io/LA558/finalproject/evaluationFramework458.png" alt="Evaluation Framework">
+
+<br></br>
+
+
+
+
+
+
+	
+<script>
+var map = L.map('map').setView([39.8283, -96.5795], 4);
+// add an OpenStreetMap tile layer
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+	attribution: 'The map contributors',
+	maxZoom: 18
+}).addTo(map); 
+//data
+var myPoints = [
+		["Bend, OR" ,44.0582, -121.3153, "94,520", "4.31%"],
+		["Dallas-Fort Worth-Arlington, TX" ,32.7079, -96.9209, "1,341,075", "1.43%"],
+		["Fargo, ND/MD" ,46.8772, -96.7879, "122,359", "1.66%"],
+	
+		
+	
+		 
+   	
+];
+function getColor(d) {
+	return  d == "Bend, OR" ? '#25d2b0' :
+		d == "Fargo, ND/MN" ? "#eb3e7a" :
+		d == "Dallas, TX" ? "#e13def" :
+	"purple"; 
+	
+}
+for (var i = 0; i < myPoints.length; i++) {
+	marker = new L.circleMarker([myPoints[i][1],myPoints[i][2]], {
+	//radius: myPoints[i][0]/2,
+	fillColor: getColor(myPoints[i][0]), 
+	color: "#000",
+	stroke: true,
+	weight: 1,
+	opacity: 1,
+	fillOpacity: 0.9   
+})
+.bindPopup("Candidate Location: "+myPoints[i][0]) //note there is no comma here
+
+.addTo(map);
+}
+
+</script>
+	
+</body>
+</html>
+
+
+
+
+<br></br>
+<br></br>  
+	<h1  align="center">In-Scope Markets</h3>
+	<p align="center">Comparing and ranking of the in-scope markets, we have used our expertise and experience to determine the necessary qualities for a successful parking lot. We have created a systematic approach to determining the best location for a parking lot of your choice. Park n’ Lot, LLC and our client have worked together to create the criteria for our decision making process. 
+	<br></br>
+Below is a diagram that breaks down the different In-Scope markets of interest into a weighting system that allows the client to make a knowledgeable decision about their new partnership. The criteria are specific to parking lots, as well as selling the property in the future for maximum revenue. </p>
+<br></br>
+
+
+
+<html>
+<head>
+<style>
+table {
+ font-family: Calibri, sans-serif, bold;
+ border-collapse: collapse;
+ width: 100%;
+}
+
+td, th {
+ border: 3px solid #000000;
+ text-align: left;
+ padding: 6px;
+}
+
+tr:nth-child(even) {
+ background-color: #F8DEEA
+}
+
+</style>
+</head>
+<body>
+
+
+<table>
+ <tr>
+  <th>City</th>
+  <th>Households</th>
+  <th>Population (2017)</th>
+  <th>Population Growth</th>
+ </tr>
+ <tr>
+  <td>Bend, OR</td>
+  <td>38,970</td>
+  <td>94,520</td>
+  <td>4.31%</td>
+ </tr>
+ <tr>
+  <td>Fargo ND/MN</td>
+  <td>56,719</td>
+  <td>122,359</td>
+  <td>1.66%</td>
+ </tr>
+ <tr>
+  <td>Dallas-Fort Worth-Arlington</td>
+  <td>2,494,426</td>
+  <td>6.8 million</td>
+  <td>1.42%</td>
+ </tr>
+
+</table>
+
+</body>
+</html>
+
+
+
+
+<br></br> 
+	<h1  align="center">Results & Recommendations</h3>
+	<p align="center">The graphic illustrates the trade-offs to be made for each location from economic and non-economic perspectives.  Top performing locations are found in the upper right quadrant.</p>
+<br></br>
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+  
+    <title>Results & Recommendations</title>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+
+<div id="container" style="min-width: 310px; max-width: 600px; height: 600px; margin: 0 auto;"></div>
+
+</head>
+
+<body>
+
+<script>
+Highcharts.chart('container', {
+
+    chart: {
+        type: 'bubble',
+	plotBackgroundColor: null,
+        plotBorderWidth: 3,
+	plotBorderColor: "#802b2b",
+        zoomType: 'xy'
+    },
+
+    title: {
+        text: 'Results & Recommendations'
+    },
+    subtitle: {
+	text: 'Candidate Locations Economic & Non-Economic Comparison'
+    },
+
+    xAxis: {
+        gridLineWidth: 1,
+	
+    },
+
+    yAxis: {
+        startOnTick: false,
+        endOnTick: false
+    },
+
+    series: [{
+	name: 'Dallas, TX',
+        data: [
+            [3.6, 1.75, 1.43]
+
+        ],
+        marker: {
+            fillColor: {
+                radialGradient: { cx: 0.4, cy: 0.3, r: 0.7 },
+                stops: [
+                    [0, 'rgba(255,255,255,0.5)'],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0.5).get('rgba')]
+                ]
+            }
+        }
+    }, {
+	name: 'Fargo, ND/MN',
+        data: [
+            [3.9, 2.5, 1.66]
+        ],
+        marker: {
+            fillColor: {
+                radialGradient: { cx: 0.4, cy: 0.3, r: 0.7 },
+                stops: [
+                    [0, 'rgba(247,198,198,0.5)'],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[1]).setOpacity(0.5).get('rgba')]
+                ]
+            }
+        }
+    },
+{
+	name: 'Bend, OR',
+        data: [
+            [3.35, 3.6, 4.31]
+        ],
+        marker: {
+            fillColor: {
+                radialGradient: { cx: 0.4, cy: 0.3, r: 0.7 },
+                stops: [
+                    [0, 'rgba(128,43,43,0.5)'],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[1]).setOpacity(0.5).get('rgba')]
+                ]
+            }
+        }
+    }]
+
+});
+
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+<br></br> 
+	
+</div>
+
+<div id="Location Comparison" class="tabcontent">
+	<h1  align="center">Non-Economic Comparison</h3>
+  
+<br></br>
+
+
+<br></br>
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	
+	<meta charset="utf-8">
+
+	<title>Location Comparison</title>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+<div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+</head>
+
+<body>
+
+	<script>
+
+Highcharts.chart('container1', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Non-Economic Comparison'
+    },
+    
+    xAxis: {
+        categories: ['Dallas-Fort Worth-Arlington, TX', 'Fargo, ND/MN', 'Bend, OR']
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Non-Economic Rating'
+        },
+        stackLabels: {
+            enabled: true,
+            style: {
+                fontWeight: 'bold',
+                color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+            }
+        }
+    },
+    legend: {
+        align: 'right',
+        x: -30,
+        verticalAlign: 'top',
+        y: 25,
+        floating: true,
+        backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+        borderColor: '#CCC',
+        borderWidth: 1,
+        shadow: false
+    },
+    tooltip: {
+        headerFormat: '<b>{point.x}</b><br/>',
+        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+    },
+    plotOptions: {
+        column: {
+            stacking: 'normal',
+            dataLabels: {
+                enabled: true,
+                color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+            }
+        }
+    },
+    series: [{
+        name: '2016 Vehicles per Household',
+        data: [1.2, 1.4, 1.2]
+    }, {
+        name: 'Educational Attainment',
+        data: [0.7, 0.8, 0.8]
+    }, {
+        name: 'Households',
+        data: [0.6, 0.8, 0.5]
+    }, {
+	name:'Average Salary',
+	data: [0.8, 0.7, 0.7]
+    }]
+});
+
+	</script>
+
+<br><br>
+<br><br>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+<br></br>
+	<h1  align="center">Economic Comparison</h3>
+<br><br>
+<br><br>
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	
+	<meta charset="utf-8">
+
+	<title>Location Comparison</title>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+<div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+</head>
+
+<body>
+
+	<script>
+
+Highcharts.chart('container2', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Economic Comparison'
+
+    },
+    xAxis: {
+        categories: ['Dallas-Fort Worth-Arlington, TX', 'Fargo, ND/MN', 'Bend, OR']
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Economic Rating'
+        },
+        stackLabels: {
+            enabled: true,
+            style: {
+                fontWeight: 'bold',
+                color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+            }
+        }
+    },
+    legend: {
+        align: 'right',
+        x: -30,
+        verticalAlign: 'top',
+        y: 25,
+        floating: true,
+        backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+        borderColor: '#CCC',
+        borderWidth: 1,
+        shadow: false
+    },
+    tooltip: {
+        headerFormat: '<b>{point.x}</b><br/>',
+        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+    },
+    plotOptions: {
+        column: {
+            stacking: 'normal',
+            dataLabels: {
+                enabled: true,
+                color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+            }
+        }
+    },
+    series: [{
+        name: 'Current Population',
+        data: [0.3, 0.7, 0.6]
+    }, {
+        name: 'Annual Growth Rate',
+        data: [0.6, 0.8, 1.6]
+    }, {
+        name: 'Avgerage Rental Rate',
+        data: [1, 1.2, 1]
+    }]
+});
+
+	</script>
+
+
+
+
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	
+	<meta charset="utf-8">
+
+<br></br>
+	<h1  align="center">Overall Comparison</h3>
+<br><br>
+<br><br>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+<div id="container3" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+</head>
+
+<body>
+
+	<script>
+
+Highcharts.chart('container3', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Overall Comparison'
+
+    },
+    xAxis: {
+        categories: ['Dallas-Fort Worth-Arlington, TX', 'Fargo, ND/MN', 'Bend, OR']
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Overall Rating'
+        },
+        stackLabels: {
+            enabled: true,
+            style: {
+                fontWeight: 'bold',
+                color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+            }
+        }
+    },
+    legend: {
+        align: 'right',
+        x: -30,
+        verticalAlign: 'top',
+        y: 25,
+        floating: true,
+        backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+        borderColor: '#CCC',
+        borderWidth: 1,
+        shadow: false
+    },
+    tooltip: {
+        headerFormat: '<b>{point.x}</b><br/>',
+        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+    },
+    plotOptions: {
+        column: {
+            stacking: 'normal',
+            dataLabels: {
+                enabled: true,
+                color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+            }
+        }
+    },
+    series: [{
+	name: 'Non-Economic Rating',
+        data: [3.3, 3.7, 3.2]
+    }, {
+        name: 'Economic Rating',
+        data: [1.9, 2.7, 3.4]
+    }]
+});
+
+	</script>
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+	
+	
+</div>
+
+<div id="Market Overview" class="tabcontent">
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+<h1 align="center">Market Overview</h1>
+<p align="center" align="center">Summary of Market Overview, Process, etc.</p>
+<br></br>
+
+
+
+<head>
+    <meta name="description" content="LA 458/558 11a Leaflet starter file - 2019">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Dallas, TX</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+
+    <style>
+        #map4 {
+            width: 350px;
+            height: 350px;
+	    margin: 60px;
+	    float: left;
+	    padding: 5px;
+            /* background-color: black; */
+        }
+	#zoomOut {
+		margin: 80px;
+		padding: 5px;
+	  }I
+	#panTo {
+		margin: 80px;
+		padding: 5px;
+	  }
+    </style>
+
+</head>
+
+<body >
+
+<h2 align="center">Dallas-Fort Worth-Arlington, TX</h2>
+
+<br></br>
+
+    <a href="javascript:frasier()" id='panTo'>Largest Neighboring City: Houston, TX</a><br>
+    
+    <a href="#" id='zoomOut'>Larger radius of Interest</a><br>
+
+    <div id='map4'></div>
+
+  
+
+    <script>
+        var map4 = L.map('map4').setView([32.7767, -96.7970], 13);
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map4);
+        L.marker([32.7767, -96.7970]).addTo(map4)
+            .bindPopup("Dallas, TX")
+            .openPopup();
+        // add multiple town markers //
+        // a array list of towns //
+        var towns = ([
+            [32.7767, -96.7970, "Dallas, TX"],
+            [29.7604, -95.3698, "Houston, TX: Population of 2.313 million"]
+        ]);
+        // loop through the array and add a marker for each //
+        for (var i = 0; i < towns.length; i++) {
+            marker = new L.marker([towns[i][0], towns[i][1]])
+                .bindPopup(towns[i][2])
+                .addTo(map4);
+        }
+        // links below the Map //
+        //Pan to Portland
+        function frasier() {
+            map4.panTo(new L.LatLng(29.7604, -95.3698));
+        }
+        // set Zoon
+        $("#zoomOut").click(function() {
+            map4.setZoom(6);
+        });
+
+
+           </script>
+
+
+
+</body>
+
+</html>
+
+
+<html>
+
+<head>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/bullet.js"></script>
+<div id="container6"></div>
+<div id="container7"></div>
+
+
+<style>
+
+#container6 {
+    max-width: 500px;
+    height: 150px;
+    margin: 2em auto;
+    padding: 20px;
+
+}
+#container7 {
+    max-width: 500px;
+    height: 150px;
+    margin: 2em auto;
+
+}
+
+
+
+
+.hc-cat-title {
+  font-size: 13px;
+  font-weight: bold;
+}
+</style>
+
+
+
+
+</head>
+
+<body>
+	<script>
+
+
+Highcharts.setOptions({
+    chart: {
+        inverted: true,
+        marginLeft: 135,
+        type: 'bullet'
+    },
+    title: {
+        text: null
+    },
+    legend: {
+        enabled: false
+    },
+    yAxis: {
+        gridLineWidth: 0
+    },
+    plotOptions: {
+        series: {
+            pointPadding: 0.25,
+            borderWidth: 0,
+            color: '#000',
+            targetOptions: {
+                width: '200%'
+            }
+        }
+    },
+    credits: {
+        enabled: false
+    },
+    exporting: {
+        enabled: false
+    }
+});
+
+Highcharts.chart('container6', {
+    chart: {
+        marginTop: 40
+    },
+    title: {
+        text: 'Dallas, TX Rating'
+    },
+    xAxis: {
+        categories: ['<span class="hc-cat-title">Scalability</span><br/>%']
+    },
+    yAxis: {
+        plotBands: [{
+            from: 0,
+            to: 25,
+            color: '#fceded'
+        }, {
+            from: 25,
+            to: 50,
+            color: '#fbc5c5'
+        }, {
+            from: 50,
+            to: 75,
+            color: '#db7575'
+        }, {
+            from: 75,
+            to: 100,
+            color: '#9d3535'
+        }],
+        title: null
+    },
+    series: [{
+        data: [{
+            y: 67.5,
+            target: 69.17
+        }]
+    }],
+    tooltip: {
+        pointFormat: '<b>{point.y}</b> (with target at {point.target})'
+    }
+});
+
+
+Highcharts.chart('container7', {
+    chart: {
+        marginTop: 40
+    },
+    xAxis: {
+        categories: ['<span class="hc-cat-title">Sustainablility</span><br/>%']
+    },
+    yAxis: {
+        plotBands: [{
+            from: 0,
+            to: 25,
+            color: '#fceded'
+        }, {
+            from: 25,
+            to: 50,
+            color: '#fbc5c5'
+        }, {
+            from: 50,
+            to: 75,
+            color: '#db7575'
+        }, {
+            from: 75,
+            to: 100,
+            color: '#9d3535'
+        }],
+        title: null
+    },
+    series: [{
+        data: [{
+            y: 36.67,
+            target: 53.33
+        }]
+    }],
+    tooltip: {
+        pointFormat: '<b>{point.y}</b> (with target at {point.target})'
+    }
+});
+
+</script>
+</body>
+</html>
+
+
+
+<br></br>
+<br></br>
+<h2 align="center">Bend, OR</h2>
+
+<p align="center" align="center"> </p>
+<br></br>
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="LA 458/558 11a Leaflet starter file - 2019">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Bend, OR</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+
+  <style>
+        #map6 {
+            width: 350px;
+            height: 350px;
+	    margin: 60px;
+	    float: left;
+	    padding: 5px;
+            /* background-color: black; */
+        }
+	#zoomOut {
+		margin: 80px;
+		padding: 5px;
+	  }
+	#panTo {
+		margin: 80px;
+		padding: 5px;
+	  }
+    </style>
+
+</head>
+
+<body>
+ <a href="javascript:frasier()" id='panTo'>Largest Neighboring City: Portland, OR</a><br>
+    
+    <a href="#" id='zoomOut'>Larger radius of Interest</a><br>
+
+    <div id='map6'></div>
+
+    <script>
+        var map6 = L.map('map6').setView([44.0582, -121.3153], 13);
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map6);
+        L.marker([44.0582, -121.3153]).addTo(map6)
+            .bindPopup("Bend, OR")
+            .openPopup();
+        // add multiple town markers //
+        // a array list of towns //
+        var towns = ([
+            [44.0582, -121.3153, "Bend, OR"],
+            [45.5155, -122.6793, "Portland, OR: Population of 647,805"]
+        ]);
+        // loop through the array and add a marker for each //
+        for (var i = 0; i < towns.length; i++) {
+            marker = new L.marker([towns[i][0], towns[i][1]])
+                .bindPopup(towns[i][2])
+                .addTo(map6);
+        }
+        // links below the Map //
+        //Pan to Portland
+        function frasier() {
+            map6.panTo(new L.LatLng(45.5155, -122.6793));
+        }
+        // set Zoon
+        $("#zoomOut").click(function() {
+            map6.setZoom(7);
+        });
+
+           </script>
+
+
+
+
+
+</body>
+
+</html>
+
+
+
+
+<html>
+
+<head>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/bullet.js"></script>
+<div id="container8"></div>
+<div id="container9"></div>
+
+
+<style>
+
+#container8 {
+    max-width: 500px;
+    height: 150px;
+    margin: 2em auto;
+    padding: 20px;
+
+}
+#container9 {
+    max-width: 500px;
+    height: 150px;
+    margin: 2em auto;
+
+}
+
+
+
+
+.hc-cat-title {
+  font-size: 13px;
+  font-weight: bold;
+}
+</style>
+
+
+
+
+</head>
+
+<body>
+	<script>
+
+
+Highcharts.setOptions({
+    chart: {
+        inverted: true,
+        marginLeft: 135,
+        type: 'bullet'
+    },
+    title: {
+        text: null
+    },
+    legend: {
+        enabled: false
+    },
+    yAxis: {
+        gridLineWidth: 0
+    },
+    plotOptions: {
+        series: {
+            pointPadding: 0.25,
+            borderWidth: 0,
+            color: '#000',
+            targetOptions: {
+                width: '200%'
+            }
+        }
+    },
+    credits: {
+        enabled: false
+    },
+    exporting: {
+        enabled: false
+    }
+});
+
+Highcharts.chart('container8', {
+    chart: {
+        marginTop: 40
+    },
+    title: {
+        text: 'Bend, OR Rating'
+    },
+    xAxis: {
+        categories: ['<span class="hc-cat-title">Scalability</span><br/>%']
+    },
+    yAxis: {
+        plotBands: [{
+            from: 0,
+            to: 25,
+            color: '#fceded'
+        }, {
+            from: 25,
+            to: 50,
+            color: '#fbc5c5'
+        }, {
+            from: 50,
+            to: 75,
+            color: '#db7575'
+        }, {
+            from: 75,
+            to: 100,
+            color: '#9d3535'
+        }],
+        title: null
+    },
+    series: [{
+        data: [{
+            y: 65,
+            target: 69.17
+        }]
+    }],
+    tooltip: {
+        pointFormat: '<b>{point.y}</b> (with target at {point.target})'
+    }
+});
+
+
+Highcharts.chart('container9', {
+    chart: {
+        marginTop: 40
+    },
+    xAxis: {
+        categories: ['<span class="hc-cat-title">Sustainablility</span><br/>%']
+    },
+    yAxis: {
+        plotBands: [{
+            from: 0,
+            to: 25,
+            color: '#fceded'
+        }, {
+            from: 25,
+            to: 50,
+            color: '#fbc5c5'
+        }, {
+            from: 50,
+            to: 75,
+            color: '#db7575'
+        }, {
+            from: 75,
+            to: 100,
+            color: '#9d3535'
+        }],
+        title: null
+    },
+    series: [{
+        data: [{
+            y: 66.67,
+            target: 53.33
+        }]
+    }],
+    tooltip: {
+        pointFormat: '<b>{point.y}</b> (with target at {point.target})'
+    }
+});
+
+</script>
+</body>
+</html>
+
+
+
+
+<br></br>
+<br></br>
+<h2 align="center">Bend, OR</h2>
+
+<p align="center" align="center"> </p>
+<br></br>
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="LA 458/558 11a Leaflet starter file - 2019">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Fargo, ND</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+
+<style>
+        #map5 {
+            width: 350px;
+            height: 350px;
+	    margin: 60px;
+	    float: left;
+	    padding: 5px;
+            /* background-color: black; */
+        }
+	#zoomOut {
+		margin: 80px;
+		padding: 5px;
+	  }
+	#panTo {
+		margin: 80px;
+		padding: 5px;
+	  }
+    </style>
+
+</head>
+
+<body>
+ <a href="javascript:frasier()" id='panTo'>Largest Neighboring City: Minneapolis, MN</a><br>
+    
+    <a href="#" id='zoomOut'>Larger radius of Interest</a><br>
+
+    <div id='map5'></div>
+
+    <script>
+        var map5 = L.map('map5').setView([46.8772, -96.7898], 13);
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map5);
+        L.marker([46.8772, -96.7898]).addTo(map5)
+            .bindPopup("Fargo, ND")
+            .openPopup();
+        // add multiple town markers //
+        // a array list of towns //
+        var towns = ([
+            [46.8772, -96.7898, "Fargo, ND"],
+            [44.9778, -93.2650, "Minneapolis, MN: Population of 422,331"]
+        ]);
+        // loop through the array and add a marker for each //
+        for (var i = 0; i < towns.length; i++) {
+            marker = new L.marker([towns[i][0], towns[i][1]])
+                .bindPopup(towns[i][2])
+                .addTo(map5);
+        }
+        // links below the Map //
+        //Pan to Portland
+        function frasier() {
+            map5.panTo(new L.LatLng(44.9778, -93.2650));
+        }
+        // set Zoon
+        $("#zoomOut").click(function() {
+            map5.setZoom(7);
+        });
+
+
+           </script>
+
+
+
+</body>
+
+</html>
+
+
+
+<html>
+
+<head>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/bullet.js"></script>
+<div id="container10"></div>
+<div id="container11"></div>
+
+
+<style>
+
+#container10 {
+    max-width: 500px;
+    height: 150px;
+    margin: 2em auto;
+    padding: 20px;
+
+}
+#container11 {
+    max-width: 500px;
+    height: 150px;
+    margin: 2em auto;
+
+}
+
+
+
+
+.hc-cat-title {
+  font-size: 13px;
+  font-weight: bold;
+}
+</style>
+
+
+
+
+</head>
+
+<body>
+	<script>
+
+
+Highcharts.setOptions({
+    chart: {
+        inverted: true,
+        marginLeft: 135,
+        type: 'bullet'
+    },
+    title: {
+        text: null
+    },
+    legend: {
+        enabled: false
+    },
+    yAxis: {
+        gridLineWidth: 0
+    },
+    plotOptions: {
+        series: {
+            pointPadding: 0.25,
+            borderWidth: 0,
+            color: '#000',
+            targetOptions: {
+                width: '200%'
+            }
+        }
+    },
+    credits: {
+        enabled: false
+    },
+    exporting: {
+        enabled: false
+    }
+});
+
+Highcharts.chart('container10', {
+    chart: {
+        marginTop: 40
+    },
+    title: {
+        text: 'Fargo, ND/MN Rating'
+    },
+    xAxis: {
+        categories: ['<span class="hc-cat-title">Scalability</span><br/>%']
+    },
+    yAxis: {
+        plotBands: [{
+            from: 0,
+            to: 25,
+            color: '#fceded'
+        }, {
+            from: 25,
+            to: 50,
+            color: '#fbc5c5'
+        }, {
+            from: 50,
+            to: 75,
+            color: '#db7575'
+        }, {
+            from: 75,
+            to: 100,
+            color: '#9d3535'
+        }],
+        title: null
+    },
+    series: [{
+        data: [{
+            y: 75,
+            target: 69.17
+        }]
+    }],
+    tooltip: {
+        pointFormat: '<b>{point.y}</b> (with target at {point.target})'
+    }
+});
+
+
+Highcharts.chart('container11', {
+    chart: {
+        marginTop: 40
+    },
+    xAxis: {
+        categories: ['<span class="hc-cat-title">Sustainablility</span><br/>%']
+    },
+    yAxis: {
+        plotBands: [{
+            from: 0,
+            to: 25,
+            color: '#fceded'
+        }, {
+            from: 25,
+            to: 50,
+            color: '#fbc5c5'
+        }, {
+            from: 50,
+            to: 75,
+            color: '#db7575'
+        }, {
+            from: 75,
+            to: 100,
+            color: '#9d3535'
+        }],
+        title: null
+    },
+    series: [{
+        data: [{
+            y: 56.67,
+            target: 53.33
+        }]
+    }],
+    tooltip: {
+        pointFormat: '<b>{point.y}</b> (with target at {point.target})'
+    }
+});
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+function openPage(pageName,elmnt,color) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+  document.getElementById(pageName).style.display = "block";
+  elmnt.style.backgroundColor = color;
+}
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+   
+</body>
+</html>
+
+
